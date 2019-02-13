@@ -13,22 +13,24 @@ public class QuoteServer {
     private List<String> listQuotes = new ArrayList<String>();
     private Random random;
 
-    public QuoteServer(int port) throws SocketException {
+    public QuoteServer(int port, int timeout) throws SocketException {
         socket = new DatagramSocket(port);
+        socket.setSoTimeout(timeout);
         random = new Random();
     }
 
     public static void main(String[] args) {
-        if (args.length < 2) {
-            System.out.println("Syntax: QuoteServer <file> <port>");
+        if (args.length < 3) {
+            System.out.println("Syntax: QuoteServer <file> <port> <timeout>");
             return;
         }
 
         String quoteFile = args[0];
         int port = Integer.parseInt(args[1]);
+        int timeout = Integer.parseInt(args[2]);
 
         try {
-            QuoteServer server = new QuoteServer(port);
+            QuoteServer server = new QuoteServer(port, timeout);
             server.loadQuotesFromFile(quoteFile);
             server.service();
         } catch (SocketException ex) {
@@ -41,7 +43,12 @@ public class QuoteServer {
     private void service() throws IOException {
         while (true) {
             DatagramPacket request = new DatagramPacket(new byte[1], 1);
-            socket.receive(request);
+            try {
+                socket.receive(request);
+            } catch (SocketTimeoutException ste) {
+                System.out.println("Timeout...no requests during timeout interval (resuming)");
+                continue;
+            }
 
             String quote = getRandomQuote();
             byte[] buffer = quote.getBytes();
