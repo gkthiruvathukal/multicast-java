@@ -14,7 +14,10 @@ public class QuoteServerThread extends Thread {
 
     public QuoteServerThread(String name) throws IOException {
         super(name);
-        socket = new DatagramSocket(4445);
+
+        ExampleProperties properties = ExampleProperties.getExampleProperties();
+        int port = properties.getPort();
+        socket = new DatagramSocket(port);
 
         try {
             in = new BufferedReader(new FileReader("one-liners.txt"));

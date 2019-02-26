@@ -10,13 +10,16 @@ public class QuoteClient {
             return;
         }
 
+        ExampleProperties properties = ExampleProperties.getExampleProperties();
+        int port = properties.getPort();
+
         // get a datagram socket
         DatagramSocket socket = new DatagramSocket();
 
         // send request
         byte[] buf = new byte[256];
         InetAddress address = InetAddress.getByName(args[0]);
-        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 4445);
+        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
         socket.send(packet);
 
         // get response

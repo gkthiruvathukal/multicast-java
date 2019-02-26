@@ -11,6 +11,16 @@ public class MulticastServerThread extends QuoteServerThread {
     }
 
     public void run() {
+        String multicastAddress;
+        int port;
+        try {
+           ExampleProperties properties = ExampleProperties.getExampleProperties();
+           multicastAddress = properties.getMulticastAddress();
+           port = properties.getPort();
+        } catch (IOException e) {
+           System.err.println("Could not load properties.");
+           return;
+        }
         while (moreQuotes) {
             try {
                 byte[] buf = new byte[256];
@@ -24,8 +34,8 @@ public class MulticastServerThread extends QuoteServerThread {
                 buf = dString.getBytes();
 
                 // send it
-                InetAddress group = InetAddress.getByName("230.0.0.1");
-                DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446);
+                InetAddress group = InetAddress.getByName(multicastAddress);
+                DatagramPacket packet = new DatagramPacket(buf, buf.length, group, port);
                 socket.send(packet);
 
                 // sleep for a while

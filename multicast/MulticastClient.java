@@ -5,9 +5,10 @@ import java.util.*;
 public class MulticastClient {
 
     public static void main(String[] args) throws IOException {
-
-        MulticastSocket socket = new MulticastSocket(4446);
-        InetAddress address = InetAddress.getByName("230.0.0.1");
+        ExampleProperties properties = ExampleProperties.getExampleProperties();
+        MulticastSocket socket = new MulticastSocket(properties.getPort());
+        String multicastAddress = properties.getMulticastAddress();
+        InetAddress address = InetAddress.getByName(multicastAddress);
         socket.joinGroup(address);
 
         DatagramPacket packet;
