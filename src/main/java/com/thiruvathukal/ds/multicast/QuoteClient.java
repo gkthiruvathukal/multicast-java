@@ -6,6 +6,8 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+/* Adapted from Quote Client/Server examples in Java documentations. */
+
 public class QuoteClient {
     public static void main(String[] args) throws IOException {
 

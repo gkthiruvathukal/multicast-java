@@ -6,12 +6,8 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-/**
- * This program demonstrates how to implement a UDP server program.
- *
- *
- * @author www.codejava.net
- */
+/* Adapted from Quote Client/Server examples in Java documentations. */
+
 public class QuoteServer {
     private DatagramSocket socket;
     private List<String> listQuotes = new ArrayList<String>();

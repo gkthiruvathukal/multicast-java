@@ -5,14 +5,9 @@ import com.thiruvathukal.ds.common.*;
 import java.io.*;
 import java.net.*;
 
-/**
- * This program demonstrates how to implement a UDP client program.
- *
- *
- * @author www.codejava.net
- */
-public class QuoteClient {
+/* Adapted from Quote Client/Server examples in Java documentations. */
 
+public class QuoteClient {
     public static void main(String[] args) {
         if (args.length < 4) {
             System.out.println("Syntax: QuoteClient <hostname> <port> <milliseconds> <timeout>");
