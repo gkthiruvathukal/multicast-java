@@ -1,8 +1,4 @@
-# Ignore Gradle project-specific cache directory
-.gradle
-
-# Ignore Gradle build output directory
-build
+# Ignore Gradle project-specific cache directory .gradle # Ignore Gradle build output directory build
 
 *.class
 *.jar
@@ -23,4 +19,3 @@ build
  #
 gradle-app.setting
 .gradletasknamecache
-gradle/wrapper/gradle-wrapper.properties
