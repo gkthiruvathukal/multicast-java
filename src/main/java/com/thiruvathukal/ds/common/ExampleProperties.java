@@ -1,3 +1,5 @@
+package com.thiruvathukal.ds.common;
+
 import java.io.*;
 import java.util.*;
 
